@@ -1,11 +1,11 @@
 # DP_LAB_1
 
-IDEA{
-  font-size: 75;
-}
-1.main.py :open 2 thread , one for Subscribe(loop) , one for Publish
-2.undistortion.py : undistortion images
-3.config.py : init file 
+<sup>IDEA</sup>
+<br>
+1.main.py :open 2 thread , one for Subscribe(loop) , one for Publish<br>
+2.undistortion.py : undistortion images<br>
+3.config.py : init file<br> 
 
-TODO
-1.Can not get images
+<sup>TODO<sup>
+<br>  
+1.Can not get images<br>
