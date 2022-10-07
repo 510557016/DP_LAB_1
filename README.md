@@ -5,6 +5,7 @@
 1.main.py :open 2 thread , one for Subscribe(loop) , one for Publish<br>
 2.undistortion.py : undistortion images<br>
 3.config.py : init file<br> 
+4. stop code ctrl+z<br>
 
 <h1>TODO</h1>
 <br>  
