@@ -190,11 +190,3 @@ if client.connected_flag:
    client.publish(pub_topic,json.dumps(payload))
    time.sleep(0.1)
    print("publishing client 3")  
-
-
-#client.loop_stop() #stop loop
-#for client in clients:
-   #client.disconnect()
-#multi_loop(flag=False) #stop loop
-#allow time for allthreads to stop before existing
-#time.sleep(10)

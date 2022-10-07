@@ -42,7 +42,9 @@ for fname in images:
 		#_img_shape = img.shape[:2]
 	#else:
 		#assert _img_shape == img.shape[:2]
+    
     #彩色影像轉灰階
+    #TODO 12 : convert image to gary
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)	
 	#print("gray=",gray)
 	#int cvFindChessboardCorners
@@ -56,6 +58,8 @@ for fname in images:
 	#CV_CALIB_CB_ADAPTIVE_THRESH - 使用自適應閾值（通過平均圖像亮度計算得到）將圖像轉換爲黑白圖，而不是一個固定的閾值。
 	#CV_CALIB_CB_NORMALIZE_IMAGE - 在利用固定閾值或者自適應的閾值進行二值化之前，先使用cvNormalizeHist來均衡化圖像亮度。
 	#CV_CALIB_CB_FILTER_QUADS - 使用其他的準則（如輪廓面積，周長，方形形狀）來去除在輪廓檢測階段檢測到的錯誤方塊
+	
+    #TODO 13 : find the image point by openCV
 	ret,corners= cv2.findChessboardCorners(gray, CHECKERBOARD,None)
 	#print("ret=",ret)
 	#print("corners=",corners)
@@ -68,7 +72,7 @@ for fname in images:
 		#cv::Size winSize, 				// 区域大小为 NXN; N=(winSize*2+1)
 		#cv::Size zeroZone, 			// 类似于winSize，但是总具有较小的范围，Size(-1,-1)表示忽略
 		#cv::TermCriteria criteria 		// 停止优化的标准);
-		cv2.cornerSubPix(gray,corners,(5,5),(-1,-1),subpix_criteria)
+		cv2.cornerSubPix(gray,corners,(3,3),(-1,-1),subpix_criteria)
 		imgpoints.append(corners)
 	
 	#double 	cv::s(
@@ -84,6 +88,7 @@ for fname in images:
 	#OutputArray perViewErrors, int flags=0, 
 	#TermCriteria criteria=TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, DBL_EPSILON))
 
+	#TOOD14 : get camera matrix and dist matrix by openCV
 	ret,cameraMatrix,distCoeffs,rvecs,tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape, None, None)
 	#print("cameraMatrix=",str(cameraMatrix.tolist()))
 	#print("distCoeffs=",str(distCoeffs.tolist()))
@@ -99,6 +104,7 @@ for fname in images:
 	#Rect *validPixROI=0, 
 	#bool centerPrincipalPoint=false)
 	
+	#TODO15 : get optimal new camera matrix, alpha = 0
 	NewcameraMatrix, validPixROI=cv2.getOptimalNewCameraMatrix(cameraMatrix,distCoeffs,img.shape[:2],alpha,img.shape[:2])
 	#print("NewcameraMatrix=",str(NewcameraMatrix.tolist()))
 	config['intrinsic']['newcameramtx']=str(NewcameraMatrix.tolist())
