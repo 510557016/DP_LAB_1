@@ -10,7 +10,7 @@ import json
 checkerboard = 7 
 CHECKERBOARD = np.array([checkerboard,checkerboard],dtype=np.int32)
 #魚眼圖片的路徑
-imgsPath = '/home/lenovo/DP/checkboard_image/'
+imgsPath = '/home/lenovo/DP/receive_folder/'
 config = configparser.ConfigParser()
 config.read('config.ini')
 alpha = 0
@@ -19,7 +19,7 @@ alpha = 0
 #cv2.TERM_CRITERIA_MAX_ITER：迭代次数超过max_iter停止。
 #cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER，两者合体，任意一个满足结束。
 
-subpix_criteria = (cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER, 30, 0.1)
+subpix_criteria = (cv2.TERM_CRITERIA_EPS+cv2.TERM_CRITERIA_MAX_ITER, 30, 0.0001)
 
 #鱼眼相机校正
 calibration_flags = cv2.fisheye.CALIB_RECOMPUTE_EXTRINSIC+cv2.fisheye.CALIB_CHECK_COND+cv2.fisheye.CALIB_FIX_SKEW
@@ -72,7 +72,7 @@ for fname in images:
 		#cv::Size winSize, 				// 区域大小为 NXN; N=(winSize*2+1)
 		#cv::Size zeroZone, 			// 类似于winSize，但是总具有较小的范围，Size(-1,-1)表示忽略
 		#cv::TermCriteria criteria 		// 停止优化的标准);
-		cv2.cornerSubPix(gray,corners,(3,3),(-1,-1),subpix_criteria)
+		cv2.cornerSubPix(gray,corners,(5,5),(-1,-1),subpix_criteria)
 		imgpoints.append(corners)
 	
 	#double 	cv::s(
