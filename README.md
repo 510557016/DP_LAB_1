@@ -9,4 +9,7 @@
 
 <h1>TODO</h1>
 <br>  
-1.Can not get images<br>
+1. sub topic : deep_learn_lecture_5 pub topic : deep_learning_lecture_5 => send msg to get echo<br>
+2. sub topic : secret_photo_5       pub topic : deep_learning_lecture_5 => send msg to get hint<br>
+3. sub topic : server_response_5    pub topic : deep_learning_lecture_5 => send msg to get 10 photo<br>
+4. sub topic : dist_data            pub topic : deep_learning_lecture_5 => send msg to get 1 photo undistort<br>
