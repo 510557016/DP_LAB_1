@@ -27,7 +27,7 @@ clients=[
 {"broker":brokerIP,"port":1883,"name":"blank","sub_topic":"deep_learn_lecture_5","pub_topic":"deep_learning_lecture_5"},
 {"broker":brokerIP,"port":1883,"name":"blank","sub_topic":"secret_photo_5"      ,"pub_topic":"deep_learning_lecture_5"},
 {"broker":brokerIP,"port":1883,"name":"blank","sub_topic":"server_response_5"   ,"pub_topic":"deep_learning_lecture_5"},
-{"broker":brokerIP,"port":1883,"name":"blank","sub_topic":"dist_photo_5"         ,"pub_topic":"dist_photo_5"}
+{"broker":brokerIP,"port":1883,"name":"blank","sub_topic":"dist_data"           ,"pub_topic":"deep_learning_lecture_5"}
 ]
 
 nclients=len(clients)
@@ -65,12 +65,16 @@ def on_message(client, userdata, message):
          cv2.imwrite('/home/lenovo/DP/receive_folder/'+filename,img)
          if not os.path.exists('undistortion_folder'):  
             os.makedirs('undistortion_folder')
+   
+   if 'dist_data' in cmds:
+      #print("cmds=",cmds)
+      #img = coverToCV2(cmds['dist_data'][i])
+      img = coverToCV2(cmds['dist_data'])
+      cv2.imwrite('/home/lenovo/DP/receive_folder/dist_image.png',img)
+
    #寫完後魚眼   
       os.system('python3.8 undistortion.py')
-
-   if 'dist_data' in cmds:
-      img = coverToCV2(cmds['data'][i])
-      cv2.imwrite('/home/lenovo/DP/receive_folder/dist_image.png',img)  
+        
       
 #TODO3 : set topic you want to subscribe  
 def on_connect(client, userdata, flags, rc):
@@ -131,7 +135,7 @@ def multi_loop(nclients,flag=True):
          client.loop(0.01)         
 
 #start program
-mqtt.Client.connected_flag=False #create flag in class
+mqtt.Client.connected_flag=False 
 no_threads=threading.active_count()
 print("current threads =",no_threads)
 print("Creating Connections ",nclients," clients")
